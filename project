@@ -1,0 +1,73 @@
+//CharacterArt
+//Ethan Vogel
+//Period 1 AP Computer Science
+//10/12/21
+public class CharacterArt {
+public static String makeACenteredTriangle(int height, int middleWidth, int sideBufferExtra) {
+    StringBuilder builder = new StringBuilder();
+    for (int row = 1; row <= height; row++) {
+        for (int b = 1; b <= height - row + sideBufferExtra; b++)
+            builder.append(' ');
+        for (int slash = 1; slash <= row; slash++)
+            builder.append('/');
+        for (int mid = 1; mid <= middleWidth; mid++)
+            builder.append('*');
+        for (int slash = 1; slash <= row; slash++)
+            builder.append('\\');
+        for (int b = 1; b <= height - row + sideBufferExtra; b++)
+            builder.append(' ');
+        builder.append('\n');
+    }
+    return builder.toString();
+}
+public static String makeADiamondsStrip(int sideLength, int numberDiamonds, int rowNumber) {
+    StringBuilder builder = new StringBuilder();
+    for (int number = 1; number <= numberDiamonds; number++) {
+        if (rowNumber <= sideLength)
+            for (int b = 1; b <= sideLength - rowNumber; b++) builder.append('.');
+        else
+            for (int b = 1; b <= rowNumber - sideLength - 1; b++) builder.append('.');
+        if (rowNumber <= sideLength)
+            for (int s = 1; s <= rowNumber; s++)
+                builder.append("/\\");
+        else
+            for (int s = 1; s <= rowNumber - 2 * (rowNumber - sideLength) + 1; s++)
+                builder.append("\\/");  
+        if (rowNumber <= sideLength)
+            for (int b = 1; b <= sideLength - rowNumber; b++) builder.append('.');
+        else
+           for (int b = 1; b <= rowNumber - sideLength - 1; b++) builder.append('.');
+    }
+    return builder.toString();
+}
+public static String makeADivider(int totalWidth, int middleWidth, int sideWidth) {
+    StringBuilder builder = new StringBuilder();
+    int remainingEachSide = (totalWidth - middleWidth - 2 * sideWidth) / 2;
+    for (int i = 0; i < sideWidth; i++) builder.append('+');
+    for (int left = 1; left <= remainingEachSide; left++)
+        builder.append(left % 2 == 1 ? '=' : '*');
+    for (int middle = 1; middle <= middleWidth; middle++) builder.append('*');
+    for (int right = 1; right <= remainingEachSide; right++)
+        builder.append(right % 2 == 1 ? '=' : '*');
+    for (int i = 0; i < sideWidth; i++) builder.append('+');
+    return builder.toString();
+}
+
+public static void main(String[] args) {
+    StringBuilder builder = new StringBuilder();
+    builder.append(makeACenteredTriangle(5, 2, 1));
+    builder.append(makeADivider(14, 2, 1)).append('\n');
+    for (int i = 1; i <= 6; i++)
+        builder.append('|').append(makeADiamondsStrip(3, 2, i)).append('|').append('\n');
+    builder.append(makeADivider(14, 2, 1)).append('\n');
+    for (int i = 4; i <= 6; i++)
+        builder.append('|').append(makeADiamondsStrip(3, 2, i)).append('|').append('\n');
+    for (int i = 1; i <= 3; i++)
+        builder.append('|').append(makeADiamondsStrip(3, 2, i)).append('|').append('\n');
+    builder.append(makeADivider(14, 2, 1)).append('\n');
+    builder.append(makeACenteredTriangle(5, 2, 1));
+    System.out.println(builder.toString());
+    System.out.println("Ethan Vogel");
+    System.out.println("2021");
+}
+}
